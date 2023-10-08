@@ -4,73 +4,6 @@ $apostasDB = new database();
 
 $infosBanca = $apostasDB->getInfosBanca();
 
-foreach ($infosBanca as $banca) {
-    if ($banca['ativo'] === true) {
-        $infosBanca = $banca;
-        break;
-    }
-}
-
-if (isset($_POST['info_banca'])) {
-    $id = $infosBanca['id'];
-    $unidade_banca = $_POST['unidade'];
-    $valor_inicial_mes = $_POST['valor_inicial_mes'];
-    $valor_unidade_mes = $valor_inicial_mes / $unidade_banca;
-
-    $sql = "UPDATE infos_banca SET
-        qnt_unidade = '$unidade_banca',
-        valor_unidade_mes = '$valor_unidade_mes',
-        valor_inicial_mes = '$valor_inicial_mes'
-        WHERE id = '$id'";
-
-    $apostasDB->executarConsulta($sql);
-    $mensagem = "Banca atualizada com sucesso!";
-    echo '<script>alert("' . $mensagem . '");</script>';
-    echo '<script>window.location.href = "index";</script>';
-}
-
-if (isset($_POST['finalizar_banca'])) {
-    $id = $infosBanca['id'];
-    $proximaBancaId = $infosBanca['proxima_banca'];
-
-    if ($proximaBancaId) {
-        $sql_desativar_banca_atual = "UPDATE infos_banca SET ativo = false WHERE id = '$id'";
-        $apostasDB->executarConsulta($sql_desativar_banca_atual);
-        $sql_ativar_proxima_banca = "UPDATE infos_banca SET ativo = true WHERE id = '$proximaBancaId'";
-        $apostasDB->executarConsulta($sql_ativar_proxima_banca);
-
-        $mensagem = "Banca finalizada com sucesso!";
-        echo '<script>alert("' . $mensagem . '");</script>';
-        echo '<script>window.location.href = "index";</script>';
-    } else {
-        $mensagem = "Não foi possível finalizar a banca, pois não há uma próxima banca definida.";
-        echo '<script>alert("' . $mensagem . '");</script>';
-        echo '<script>window.location.href = "index";</script>';
-    }
-}
-
-
-if (isset($_POST['nova_banca'])) {
-    $unidade_banca = $_POST['unidade'];
-    $valor_inicial_mes = $_POST['valor_inicial_mes'];
-    $valor_unidade_mes = $valor_inicial_mes / $unidade_banca;
-    $mes_banca = $_POST['mes_banca'];
-    $ano_banca = $_POST['ano_banca'];
-    $id = md5($valor_unidade_mes * $unidade_banca * $ano_banca) . $ano_banca;
-
-    $sql = "INSERT INTO infos_banca (id, qnt_unidade, valor_unidade_mes, valor_inicial_mes, mes_banca, ano_banca, ativo) VALUES ('$id', '$unidade_banca', '$valor_unidade_mes', '$valor_inicial_mes', '$mes_banca', '$ano_banca', false)";
-    $apostasDB->executarConsulta($sql);
-    $id_banca_atual = $infosBanca['id'];
-    $sql_update_banca_atual = "UPDATE infos_banca SET proxima_banca = '$id' WHERE id = '$id_banca_atual'";
-    $apostasDB->executarConsulta($sql_update_banca_atual);
-
-    $mensagem = "Banca criada com sucesso!";
-    echo '<script>alert("' . $mensagem . '");</script>';
-    echo '<script>window.location.href = "index";</script>';
-}
-
-
-$diaAtual = date('d');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -80,7 +13,7 @@ $diaAtual = date('d');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/png" href="https://i.postimg.cc/yNv6jxDy/Gest-o-de-banca.png">
-    <title>Informações da Banca</title>
+    <title>Evolução da Banca</title>
 </head>
 
 <body>
