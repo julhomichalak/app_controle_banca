@@ -151,7 +151,7 @@ WHERE id = " . (int)$id_aposta;
 							<div class="col-md-6">
 								<div class="list-group">
 									<a href="https://br.novibet.com/apostas-esportivas" class="list-group-item list-group-item-action" target="_blank">Novibet</a>
-									<a href="https://www.bet365.com/" class="list-group-item list-group-item-action" target="_blank">Bet365</a>
+									<a href="https://www.bet365.com/#/IP/B1" class="list-group-item list-group-item-action" target="_blank">Bet365</a>
 									<a href="https://br.betano.com" class="list-group-item list-group-item-action" target="_blank">Betano</a>
 								</div>
 							</div>
@@ -177,7 +177,7 @@ WHERE id = " . (int)$id_aposta;
 							<a href="nova-aposta" class="btn btn-success btn-lg">Criar nova aposta</a>
 						</div>
 						<div class="col p-0">
-							<a href="#" class="btn btn-info btn-lg">Evolução da banca</a>
+							<a href="evolucao-banca" class="btn btn-info btn-lg">Evolução da banca</a>
 						</div>
 					</div>
 				</div>
@@ -213,8 +213,8 @@ WHERE id = " . (int)$id_aposta;
 								<td style="min-width: 115px;"><?= 'R$ ' . $aposta['valor']; ?></td>
 								<td><?= $aposta['unidade']; ?></td>
 								<td><?= $aposta['odd']; ?></td>
-								<td><?= 'R$ ' . $aposta['valor'] * $aposta['odd']; ?></td>
-								<td style="min-width: 100px;"><?= 'R$ ' . ($aposta['valor'] * $aposta['odd']) - ($aposta['valor_unidade'] * $aposta['unidade']); ?></td>
+								<td><?= 'R$ ' . number_format($aposta['valor'] * $aposta['odd'], 2, '.', ''); ?></td>
+								<td style="min-width: 100px;"><?= number_format(($aposta['valor'] * $aposta['odd']) - ($aposta['valor_unidade'] * $aposta['unidade']), 2, '.', ''); ?></td>
 								<td><?= 'R$ ' . $aposta['valor_unidade']; ?></td>
 								<td><?= $aposta['casa']; ?></td>
 								<td><?= formatarDataMinuto($aposta['data_jogo'] . $aposta['hora_jogo']); ?></td>
