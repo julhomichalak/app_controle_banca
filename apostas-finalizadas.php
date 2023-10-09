@@ -6,6 +6,11 @@ $apostas = $apostasDB->getApostasFinalizadas();
 $apostasGanhas = $apostasDB->getApostasByStatus(1);
 $apostasPerdidas = $apostasDB->getApostasByStatus(2);
 $apostasDevolvidas = $apostasDB->getApostasByStatus(3);
+$quantidadeApostas = count($apostas);
+foreach ($apostas as $aposta) {
+    $totalOdds += $aposta['odd'];
+}
+$mediaOdds = $totalOdds / $quantidadeApostas;
 
 function formatarData($data)
 {
@@ -47,7 +52,7 @@ function formatarDataMinuto($data)
                         Voltar
                     </a>
                     <h4 class="col mb-3">
-                        Apostas Finalizadas (<?= count($apostas) ?>)
+                        Apostas Finalizadas (<?= $quantidadeApostas ?>)
                     </h4>
                     <h4 class="col mb-3 text-success">
                         Apostas Vencidas (<?= count($apostasGanhas) ?>)
@@ -59,6 +64,7 @@ function formatarDataMinuto($data)
                         Apostas Devolvidas (<?= count($apostasDevolvidas) ?>)
                     </h4>
                 </div>
+
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>

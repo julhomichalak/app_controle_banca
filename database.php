@@ -66,6 +66,18 @@ class database
         }
     }
 
+    public function getInfosBancaAtiva()
+    {
+        try {
+            $query = "SELECT * FROM infos_banca WHERE ativo = true";
+            $stmt = $this->conn->query($query);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+        } catch (PDOException $e) {
+            echo "Erro na consulta SQL: " . $e->getMessage();
+            return false;
+        }
+    }
+
     public function getApostasByStatus($status)
     {
         try {

@@ -2,14 +2,8 @@
 require_once 'database.php';
 $apostasDB = new database();
 
-$infosBanca = $apostasDB->getInfosBanca();
+$infosBanca = $apostasDB->getInfosBancaAtiva();
 
-foreach ($infosBanca as $banca) {
-    if ($banca['ativo'] === true) {
-        $infosBanca = $banca;
-        break;
-    }
-}
 
 if (isset($_POST['info_banca'])) {
     $id = $infosBanca['id'];
@@ -106,7 +100,7 @@ $diaAtual = date('d');
                                 <h4>Banca atual</h4>
                             </div>
                             <div class="mb-3">
-                                <label for="unidade_banca" class="form-label">Unidade da banca</label>
+                                <label for="unidade_banca" class="form-label">Unidade da banca</label><span class="badge rounded-pill text-bg-success ms-1">50U = 2%</span><span class="badge rounded-pill text-bg-success ms-1">33.33U = 3%</span><span class="badge rounded-pill text-bg-success ms-1">25U = 4%</span>
                                 <input value="<?= $infosBanca['qnt_unidade']; ?>" type="text" class="form-control" id="unidade_banca" name="unidade" required>
                             </div>
                             <div class="mb-3">
@@ -144,6 +138,7 @@ $diaAtual = date('d');
                 <div class="modal-body">
                     <? if ($diaAtual == '30' || $diaAtual == '31' || $diaAtual == '01') {
                     ?>
+                        <span class="badge text-bg-danger mb-1 text-center d-block p-2 fs-6">Crie uma banca nova antes de finalizar a banca atual!</span>
                         <!--Caso não seja dia primeiro liberar form -->
                         <div class="modal-body">
                             Você confirma que irá finalizar a banca o id <b><?= $infosBanca['id'] ?></b>?<br>
@@ -153,7 +148,6 @@ $diaAtual = date('d');
                             <span class="badge text-bg-danger">Fechou o mês com um <br><strong>lucro de R$ </strong> <?= $apostasDB->getLucroBancaReais() ?><br></span>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                             <form method="POST">
                                 <button name="finalizar_banca" type=" submit" class="btn btn-danger">Confirmar finalização de banca</button>
                             </form>
@@ -172,9 +166,10 @@ $diaAtual = date('d');
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <? if ($diaAtual == 1) {
+                    <? if ($diaAtual == '30' || $diaAtual == '31' || $diaAtual == '01') {
                     ?>
-                        <button type="button" class="btn btn-primary">Criar Nova Banca</button>
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     <? } else {
                     ?>
                     <? }

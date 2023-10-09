@@ -176,9 +176,9 @@ WHERE id = " . (int)$id_aposta;
 						<div class="col p-0">
 							<a href="nova-aposta" class="btn btn-success btn-lg">Criar nova aposta</a>
 						</div>
-						<div class="col p-0">
+						<!-- <div class="col p-0">
 							<a href="evolucao-banca" class="btn btn-info btn-lg">Evolução da banca</a>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<h4 class="mb-3">
