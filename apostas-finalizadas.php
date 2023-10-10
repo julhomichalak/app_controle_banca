@@ -37,7 +37,7 @@ function formatarDataMinuto($data)
     <title>Apostas Finalizadas</title>
 </head>
 
-<body>
+<body class="bg-dark text-light">
     <div class="container-fluid">
         <div class="row">
             <div class="col md-12 mt-3">
@@ -65,7 +65,7 @@ function formatarDataMinuto($data)
                     </h4>
                 </div>
 
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover table-dark">
                     <thead>
                         <tr>
                             <th>Criada em</th>

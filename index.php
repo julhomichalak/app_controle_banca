@@ -103,13 +103,13 @@ WHERE id = " . (int)$id_aposta;
 	<title>Gestão de banca</title>
 </head>
 
-<body>
+<body class="bg-dark text-light">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col md-12 mt-3">
 				<div class="row">
 					<div class="col container">
-						<table class="table table-bordered text-center">
+						<table class="table table-bordered text-center table-dark ">
 							<thead>
 								<tr>
 									<th>Banca Inicial</th>
@@ -121,8 +121,8 @@ WHERE id = " . (int)$id_aposta;
 							<tbody>
 								<tr>
 									<td>R$ <?= $apostasDB->getValorInicialBanca() ?></td>
-									<td>R$ <?= $apostasDB->getBancaAtual(); ?></td>
-									<td>R$ <?= $apostasDB->getBancaAtualSemApostasAbertas(); ?></td>
+									<td>R$ <?= $apostasDB->getValorInicialBanca() + $apostasDB->getLucroBancaReais(); ?></td>
+									<td>R$ <?= $apostasDB->getValorInicialBanca() + $apostasDB->getLucroBancaReaisSemApostasAtuais(); ?></td>
 									<td class="text-success"><?= $apostasDB->calcularPorcentagemApostasPorStatus(1) ?> | <?= $apostasDB->contarRegistrosPorStatus(1)[1] ?> </td>
 
 								</tr>
@@ -155,6 +155,8 @@ WHERE id = " . (int)$id_aposta;
 									<a href="https://br.betano.com" class="list-group-item list-group-item-action" target="_blank">Betano</a>
 								</div>
 							</div>
+
+
 							<div class="col-md-6">
 								<div class="list-group">
 									<a href="https://www.betfast.io/br" class="list-group-item list-group-item-action" target="_blank">Betfast</a>
@@ -164,6 +166,7 @@ WHERE id = " . (int)$id_aposta;
 							</div>
 						</div>
 					</div>
+
 				</div>
 				<div class="container mb-3">
 					<div class="row justify-content-center text-center">
@@ -171,7 +174,7 @@ WHERE id = " . (int)$id_aposta;
 							<a href="infos-banca" class="btn btn-primary btn-lg">Controlar informações da banca</a>
 						</div>
 						<div class="col p-0">
-							<a href="apostas-finalizadas" class="btn btn-secondary btn-lg">Ver apostas passadas (<?= count($apostasFinalizadas) ?>)</a>
+							<a href="apostas-finalizadas" class="btn btn-secondary btn-lg">Ver apostas finalizadas (<?= count($apostasFinalizadas) ?>)</a>
 						</div>
 						<div class="col p-0">
 							<a href="nova-aposta" class="btn btn-success btn-lg">Criar nova aposta</a>
@@ -184,7 +187,7 @@ WHERE id = " . (int)$id_aposta;
 				<h4 class="mb-3">
 					Apostas atuais (<?= count($apostas) ?>)
 				</h4>
-				<table class="table table-bordered table-hover">
+				<table class="table table-bordered table-hover table-dark">
 					<thead>
 						<tr>
 							<th>Criada em</th>
@@ -214,7 +217,7 @@ WHERE id = " . (int)$id_aposta;
 								<td><?= $aposta['unidade']; ?></td>
 								<td><?= $aposta['odd']; ?></td>
 								<td><?= 'R$ ' . number_format($aposta['valor'] * $aposta['odd'], 2, '.', ''); ?></td>
-								<td style="min-width: 100px;"><?= number_format(($aposta['valor'] * $aposta['odd']) - ($aposta['valor_unidade'] * $aposta['unidade']), 2, '.', ''); ?></td>
+								<td style="min-width: 100px;"><?= 'R$ ' .  number_format(($aposta['valor'] * $aposta['odd']) - ($aposta['valor_unidade'] * $aposta['unidade']), 2, '.', ''); ?></td>
 								<td><?= 'R$ ' . $aposta['valor_unidade']; ?></td>
 								<td><?= $aposta['casa']; ?></td>
 								<td><?= formatarDataMinuto($aposta['data_jogo'] . $aposta['hora_jogo']); ?></td>
@@ -233,7 +236,7 @@ WHERE id = " . (int)$id_aposta;
 							<!-- Modal green -->
 							<div class="modal fade" id="modalGreen<?= $aposta['id'] ?>" tabindex="-1" aria-hidden="true">
 								<div class="modal-dialog">
-									<div class="modal-content">
+									<div class="modal-content bg-dark text-light">
 										<div class="modal-header">
 											<h1 class="modal-title fs-5">Deu green</h1>
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -262,7 +265,7 @@ WHERE id = " . (int)$id_aposta;
 							<!-- Modal red -->
 							<div class="modal fade" id="modalRed<?= $aposta['id'] ?>" tabindex="-1" aria-hidden="true">
 								<div class="modal-dialog">
-									<div class="modal-content">
+									<div class="modal-content bg-dark text-light">
 										<div class="modal-header">
 											<h1 class="modal-title fs-5">Deu red</h1>
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -288,7 +291,7 @@ WHERE id = " . (int)$id_aposta;
 							<!-- Modal devolveu -->
 							<div class="modal fade" id="modalDevolveu<?= $aposta['id'] ?>" tabindex="-1" aria-hidden="true">
 								<div class="modal-dialog">
-									<div class="modal-content">
+									<div class="modal-content bg-dark text-light">
 										<div class="modal-header">
 											<h1 class="modal-title fs-5">Devolveu aposta</h1>
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -317,17 +320,17 @@ WHERE id = " . (int)$id_aposta;
 							<!-- Modal edit -->
 							<div class="modal fade" id="modalEdit<?= $aposta['id'] ?>" tabindex="-1" aria-hidden="true">
 								<div class="modal-dialog">
-									<div class="modal-content">
+									<div class="modal-content bg-dark text-light">
 										<div class="modal-header">
 											<h1 class="modal-title fs-5">Editar Aposta</h1>
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
 											<form method="POST">
-												<input name="id_aposta" type="hidden" class="form-control" id="id_aposta" required value="<?= $aposta['id']; ?>">
+												<input name="id_aposta" type="hidden" class="form-control bg-dark text-light" id="id_aposta" required value="<?= $aposta['id']; ?>">
 												<div class="mb-3">
 													<label for="competicao" class="form-label me-2">Competição</label>
-													<select name="competicao" required>
+													<select class="bg-dark text-light" name="competicao" required>
 														<?php foreach ($competicoes as $competicao) : ?>
 															<?php $selected = ($aposta['competicao'] == $competicao['nome']) ? 'selected' : ''; ?>
 															<option value="<?= $competicao['nome']; ?>" <?= $selected; ?>>
@@ -338,35 +341,35 @@ WHERE id = " . (int)$id_aposta;
 												</div>
 												<div class="mb-3">
 													<label for="mandante" class="form-label">Mandante</label>
-													<input name="mandante" type="text" class="form-control" id="mandante" required value="<?= $aposta['mandante']; ?>">
+													<input name="mandante" type="text" class="form-control bg-dark text-light" id="mandante" required value="<?= $aposta['mandante']; ?>">
 												</div>
 												<div class="mb-3">
 													<label for="visitante" class="form-label">Visitante</label>
-													<input name="visitante" type="text" class="form-control" id="visitante" required value="<?= $aposta['visitante']; ?>">
+													<input name="visitante" type="text" class="form-control bg-dark text-light" id="visitante" required value="<?= $aposta['visitante']; ?>">
 												</div>
 												<div class="mb-3">
 													<label for="data_jogo" class="form-label">Data do jogo</label>
-													<input name="data_jogo" type="date" class="form-control" id="data_jogo" required value="<?= $aposta['data_jogo']; ?>">
+													<input name="data_jogo" type="date" class="form-control bg-dark text-light" id="data_jogo" required value="<?= $aposta['data_jogo']; ?>">
 												</div>
 												<div class="mb-3">
 													<label for="hora_jogo" class="form-label">Hora do jogo</label>
-													<input name="hora_jogo" type="time" class="form-control" id="hora_jogo" required value="<?= $aposta['hora_jogo']; ?>">
+													<input name="hora_jogo" type="time" class="form-control bg-dark text-light" id="hora_jogo" required value="<?= $aposta['hora_jogo']; ?>">
 												</div>
 												<div class="mb-3">
 													<label for="casa" class="form-label">Casa</label>
-													<input name="casa" type="text" class="form-control" id="casa" required value="<?= $aposta['casa']; ?>">
+													<input name="casa" type="text" class="form-control bg-dark text-light" id="casa" required value="<?= $aposta['casa']; ?>">
 												</div>
 												<div class="mb-3">
 													<label for="odd" class="form-label">ODD</label>
-													<input name="odd" type="text" class="form-control" id="odd" required value="<?= $aposta['odd']; ?>">
+													<input name="odd" type="text" class="form-control bg-dark text-light" id="odd" required value="<?= $aposta['odd']; ?>">
 												</div>
 												<div class="mb-3">
 													<label for="unidade" class="form-label">Unidade</label>
-													<input name="unidade" type="number" class="form-control" id="unidade" required value="<?= $aposta['unidade']; ?>">
+													<input name="unidade" type="number" class="form-control bg-dark text-light" id="unidade" required value="<?= $aposta['unidade']; ?>">
 												</div>
 												<div class="mb-3">
 													<label for="descricao" class="form-label">Descrição</label>
-													<textarea name="descricao" class="form-control" placeholder="Descrição da aposta" id="descricao" style="height: 100px"><?= $aposta['descricao']; ?></textarea>
+													<textarea name="descricao" class="form-control bg-dark text-light" placeholder="Descrição da aposta" id="descricao" style="height: 100px"><?= $aposta['descricao']; ?></textarea>
 												</div>
 										</div>
 										<div class="modal-footer">

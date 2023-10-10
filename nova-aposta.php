@@ -58,7 +58,7 @@ if (isset($_POST['nova_aposta'])) {
     <title>Nova Aposta</title>
 </head>
 
-<body>
+<body class="bg-dark text-light">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -68,12 +68,12 @@ if (isset($_POST['nova_aposta'])) {
                 <a href="index" class="btn btn-success btn-lg mb-3">
                     Voltar
                 </a>
-                <div class="card">
+                <div class="card bg-dark text-light">
                     <div class="card-body">
                         <form method="POST">
                             <div class="mb-3">
                                 <label for="competicao" class="form-label me-2">Competição</label>
-                                <select name="competicao" required>
+                                <select class="bg-dark text-light" name="competicao" required>
                                     <?php foreach ($competicoes as $competicao) : ?>
                                         <option value="<?php echo $competicao['nome']; ?>">
                                             <?php echo $competicao['nome']; ?>
@@ -85,36 +85,36 @@ if (isset($_POST['nova_aposta'])) {
                             </div>
                             <div class="mb-3">
                                 <label for="mandante" class="form-label">Mandante</label>
-                                <input name="mandante" type=" text" class="form-control" id="mandante" required>
+                                <input name="mandante" type=" text" class="form-control bg-dark text-light" id="mandante" required>
                             </div>
                             <div class="mb-3">
                                 <label for="visitante" class="form-label">Visitante</label>
-                                <input name="visitante" type="text" class="form-control" id="visitante" required>
+                                <input name="visitante" type="text" class="form-control bg-dark text-light" id="visitante" required>
                             </div>
                             <div class="mb-3">
                                 <label for="data_jogo" class="form-label">Data do jogo</label>
-                                <input name="data_jogo" type="date" class="form-control" id="data_jogo" required>
+                                <input name="data_jogo" type="date" class="form-control bg-dark text-light" id="data_jogo" required>
                             </div>
                             <div class="mb-3">
                                 <label for="hora_jogo" class="form-label">Hora do jogo</label>
-                                <input name="hora_jogo" type="time" class="form-control" id="hora_jogo" required>
+                                <input name="hora_jogo" type="time" class="form-control bg-dark text-light" id="hora_jogo" required>
                             </div>
                             <div class="mb-3">
                                 <label for="casa" class="form-label">Casa</label>
-                                <input type="text" class="form-control" id="casa" name="casa" required>
+                                <input type="text" class="form-control bg-dark text-light" id="casa" name="casa" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="odd" class="form-label">ODD</label>
-                                <input name="odd" type="text" class="form-control" id="odd" required>
+                                <input name="odd" type="text" class="form-control bg-dark text-light" id="odd" required>
                             </div>
                             <div class="mb-3">
                                 <label for="unidade" class="form-label">Unidade</label>
-                                <input name="unidade" type="text" class="form-control" id="unidade" required>
+                                <input name="unidade" type="text" class="form-control bg-dark text-light" id="unidade" required>
                             </div>
                             <div class="mb-3">
                                 <label for="descricao" class="form-label">Descrição</label>
-                                <textarea name="descricao" class="form-control" placeholder="Descrição da aposta" id="descricao" style="height: 100px"></textarea>
+                                <textarea name="descricao" class="form-control bg-dark text-light" placeholder="Descrição da aposta" id="descricao" style="height: 100px"></textarea>
                             </div>
                             <button name="nova_aposta" type="submit" class="btn btn-success">Criar Aposta</button>
                         </form>

@@ -77,7 +77,7 @@ $diaAtual = date('d');
     <title>Informações da Banca</title>
 </head>
 
-<body>
+<body class="bg-dark text-light">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -93,27 +93,27 @@ $diaAtual = date('d');
                     </a>
 
                 </div>
-                <div class="card">
+                <div class="card bg-dark">
                     <div class="card-body">
                         <form method="POST" name="info_banca">
                             <div class="mb-3 text-center">
-                                <h4>Banca atual</h4>
+                                <h4 class="text-light">Banca atual</h4>
                             </div>
                             <div class="mb-3">
-                                <label for="unidade_banca" class="form-label">Unidade da banca</label><span class="badge rounded-pill text-bg-success ms-1">50U = 2%</span><span class="badge rounded-pill text-bg-success ms-1">33.33U = 3%</span><span class="badge rounded-pill text-bg-success ms-1">25U = 4%</span>
-                                <input value="<?= $infosBanca['qnt_unidade']; ?>" type="text" class="form-control" id="unidade_banca" name="unidade" required>
+                                <label for="unidade_banca" class="form-label text-light">Unidade da banca</label><span class="badge rounded-pill text-bg-success ms-1">50U = 2%</span><span class="badge rounded-pill text-bg-success ms-1">33.33U = 3%</span><span class="badge rounded-pill text-bg-success ms-1">25U = 4%</span>
+                                <input value="<?= $infosBanca['qnt_unidade']; ?>" type="text" class="form-control bg-dark text-light bg-dark text-light" id="unidade_banca" name="unidade" required>
                             </div>
                             <div class="mb-3">
-                                <label for="valor_inicial_mes" class="form-label">Valor Inicial do Mês</label>
-                                <input value="<?= $infosBanca['valor_inicial_mes']; ?>" type="text" class="form-control" id="valor_inicial_mes" name="valor_inicial_mes" required>
+                                <label for="valor_inicial_mes" class="form-label text-light">Valor Inicial do Mês</label>
+                                <input value="<?= $infosBanca['valor_inicial_mes']; ?>" type="text" class="form-control bg-dark text-light" id="valor_inicial_mes" name="valor_inicial_mes" required>
                             </div>
                             <div class="mb-3">
-                                <label for="mes_banca" class="form-label">Mês da banca</label>
-                                <input value="<?= $infosBanca['mes_banca']; ?>" type="text" class="form-control" id="mes_banca" name="mes_banca" disabled>
+                                <label for="mes_banca" class="form-label text-light">Mês da banca</label>
+                                <input value="<?= $infosBanca['mes_banca']; ?>" type="text" class="form-control bg-dark text-light" id="mes_banca" name="mes_banca" disabled>
                             </div>
                             <div class="mb-3">
-                                <label for="ano_banca" class="form-label">Valor Inicial do Mês</label>
-                                <input value="<?= $infosBanca['ano_banca']; ?>" type="text" class="form-control" id="ano_banca" name="ano_banca" disabled>
+                                <label for="ano_banca" class="form-label text-light">Valor Inicial do Mês</label>
+                                <input value="<?= $infosBanca['ano_banca']; ?>" type="text" class="form-control bg-dark text-light" id="ano_banca" name="ano_banca" disabled>
                             </div>
                             <button name="info_banca" type="submit" class="btn btn-success">Atualizar Banca</button>
                             <button name="finalizar_banca" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalFinalizarBanca">Finalizar Banca</button>
@@ -130,12 +130,12 @@ $diaAtual = date('d');
     <!-- Modal Finalizar Banca-->
     <div class="modal fade" id="modalFinalizarBanca" tabindex="-1" aria-labelledby="modalFinalizarBanca" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-dark">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalFinalizarBanca">Finalizar Banca</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body ">
                     <? if ($diaAtual == '30' || $diaAtual == '31' || $diaAtual == '01') {
                     ?>
                         <span class="badge text-bg-danger mb-1 text-center d-block p-2 fs-6">Crie uma banca nova antes de finalizar a banca atual!</span>
@@ -184,13 +184,13 @@ $diaAtual = date('d');
     <!-- Modal Nova Banca -->
     <div class="modal fade" id="modalNovaBanca" tabindex="-1" aria-labelledby="modalNovaBanca" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-dark">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalNovaBanca">Criar Nova Banca</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <? if ($diaAtual == '7' || $diaAtual == '31' || $diaAtual == '01') {
+                    <? if ($diaAtual == '30' || $diaAtual == '31' || $diaAtual == '01') {
                     ?>
                         <!--Caso não seja dia primeiro liberar form -->
                         <form method="POST" name="nova_banca">
@@ -199,19 +199,19 @@ $diaAtual = date('d');
                             </div>
                             <div class="mb-3">
                                 <label for="unidade_banca" class="form-label">Unidade da banca</label><span class="badge rounded-pill text-bg-success ms-1">50U = 2%</span><span class="badge rounded-pill text-bg-success ms-1">33.33U = 3%</span><span class="badge rounded-pill text-bg-success ms-1">25U = 4%</span>
-                                <input value="<?= $infosBanca['qnt_unidade']; ?>" type="text" class="form-control" id="unidade_banca" name="unidade" required>
+                                <input value="<?= $infosBanca['qnt_unidade']; ?>" type="text" class="form-control bg-dark text-light" id="unidade_banca" name="unidade" required>
                             </div>
                             <div class="mb-3">
                                 <label for="valor_inicial_mes" class="form-label">Valor ATUAL da banca</label> <span class="badge rounded-pill text-bg-primary">Começou o mês com <?= $infosBanca['valor_inicial_mes']; ?></span>
-                                <input value="<?= $apostasDB->getBancaAtual(); ?>" type="text" class="form-control" id="valor_inicial_mes" name="valor_inicial_mes" required>
+                                <input value="<?= $apostasDB->getBancaAtual(); ?>" type="text" class="form-control bg-dark text-light" id="valor_inicial_mes" name="valor_inicial_mes" required>
                             </div>
                             <div class="mb-3">
                                 <label for="mes_banca" class="form-label">Mês da banca</label><span class="badge rounded-pill text-bg-danger ms-1">ATENÇÃO</span>
-                                <input value="<?= $infosBanca['mes_banca']; ?>" type="text" class="form-control" id="mes_banca" name="mes_banca" required>
+                                <input value="<?= $infosBanca['mes_banca']; ?>" type="text" class="form-control bg-dark text-light" id="mes_banca" name="mes_banca" required>
                             </div>
                             <div class="mb-3">
                                 <label for="ano_banca" class="form-label">Ano da banca</label><span class="badge rounded-pill text-bg-danger ms-1">ATENÇÃO</span>
-                                <input value="<?= $infosBanca['ano_banca']; ?>" type="text" class="form-control" id="ano_banca" name="ano_banca" required>
+                                <input value="<?= $infosBanca['ano_banca']; ?>" type="text" class="form-control bg-dark text-light" id="ano_banca" name="ano_banca" required>
                             </div>
                             <button name="nova_banca" type="submit" class="btn btn-success">Criar Banca</button>
                         </form>

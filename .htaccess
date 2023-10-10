@@ -8,7 +8,5 @@ RewriteBase /app_controle_banca/
 #passando os parametros
 RewriteRule ^([a-zA-Z0-9_-]*)/?([a-zA-Z0-9_-]*)/?([a-zA-Z0-9_-]*)$ "$1.php?selected_code=$2&selected_code2=$3"
 
-#imagens e demais diretórios! 
-RewriteRule ^.*(assets|includes)/(.*)$ $1/$2
 
 
